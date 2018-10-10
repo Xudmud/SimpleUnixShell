@@ -1,0 +1,41 @@
+--------------
+5 October 2018
+--------------
++Implemented exit code support. The shell will now print the exit code of the
+ last executed command before the prompt. In the case of a pipe, the shell
+ prints the result of the last command in the pipe.
+
+For the future:
+Still researching interpreter support.
+
+Expand on cd to hold oldpwd
+
+Try to set up tab completion. (if 'tab' is pressed, use the current text to do
+a str.contains() or equivalent on the directories in PATH (or pwd), display
+results?)
+
+Restructure shell and modularize each portion.
+
+
+Personal notes:
+More and more I'm understanding why the bash sourcecode is so many files.
+
+
+--------------
+1 October 2018
+--------------
++Changed how the wait() command is implemented, so an input file that is larger
+ than the pipe buffer no longer causes a deadlock.
+
++Implemented basic cd support. The command requires an argument to the relative
+ or absolute path of the directory to change to.
+ TODO:  -Implement support for an argumentless cd to go to home directory.
+        -Implement support for ~ as an alias for /home/<user>
+
+
+For the future:
+Since apparently there's more to implementing a shell as an interpreter than
+just feeding it a bunch of commands in a file (should have been obvious),
+research how to set up the shell as an interpreter.
+
+Look into grabbing exit codes from the programs that run, if possible.

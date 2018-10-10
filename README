@@ -1,0 +1,118 @@
+/-------------------------------------------------------------------------------
+| Name:       Gregory Wicklund
+| Student ID: 810906774
+| Class:      CSCI3453 Operating Systems Concepts, Fall 2018
+| Lab 1:      Shell Implementation
+| Due Date:   26 September 2018
+\------------------------------------------------------------------------------
+
+Files Included:
+Lab1
+|--include
+|--|--myfuncs.h
+|--|--stringparser.h
+|--lib
+|--obj
+|--src
+|--|--main.c
+|--|--makefile
+|--|--myfuncs.c
+|--|--stringparser.c
+
+Instructions:
+run make inside the src directory
+$ make
+
+Execute the shell process
+$ ./wic6774shell
+
+
+
+                                Readme
+
+This lab was to build a basic shell that could take in one or more commands,
+parse them into command and arguments, and then fork a child process(es) and
+execute them.
+
+In addition, support was needed for file redirection, both input and output.
+For output, both overwrite and append are supported in this implementation.
+
+Pipes also needed to be supported, where one program's output became the input
+for the next program in the series of pipes. This shell supports up to 16,
+though could support more by changing the size of the comm_pipe[] variable in
+main.c.
+
+Lastly, error messages needed to be displayed if the typed command has errors,
+or if it can't be found. In most cases, the forked process itself will output
+to stderr if there is a syntax error in the command, and the shell will indicate
+if a command cannot be found using the execvp system call.
+
+One direct command needed to be implemented: It would be meaningless to fork a
+process for an "exit" command, since the intent is to exit the main process.
+
+
+Functions used:
+pipeComm()
+Reads in the user-entered string and removes whitespace before and after a pipe.
+This avoids potential arguments of "" getting passed to execvp.
+
+pipestring()
+Builds an array of commands, converting the | character to '\0' to convert the
+given array into an array of null-terminated strings. Also keeps count of the
+number of commands, to pass to the pipeComm function.
+
+pipeComm()
+Source for recursive implementation: https://gist.github.com/zed/7835043
+Main function for executing the given command(s). Will parse the given command,
+redirect input/output, with files or pipes, depending on what the command calls
+for, fork a new process to execute the current command in the array, and then
+call itself recursively with the next command and the input fd of the command
+for use in the next one.
+
+redirstring()
+Removes whitespace around the <, >, and >> sequences, of an input string for the
+same reasons as pipeComm().
+
+filestring()
+Separates the given input string into the base command, input file, and output
+or append file.
+
+parsestring()
+Source: http://www.csl.mtu.edu/cs4411.ck/www/NOTES/process/fork/shell.c
+Takes in a null-terminated string and splits it into an array of null-terminated
+strings, effectively building an argv[] array to pass to execvp
+
+
+Working:
+Prompting for commands and returning to the shell after finishing.
+
+Commands with no arguments
+
+Commands with arguments
+
+Piped commands
+
+Displaying an error message if the program can't be found.
+If a command has syntax errors then most programs themselves output to stderr.
+By only piping stdout or stdin, stderr should print to the console.
+
+(Ideally I should add more checks for failed pipes/closes).
+
+Passing arguments with the binary will run the arguments as a single command.
+
+File redirection (<, >, >>)
+
+
+Not Working:
+Builtins (such as cd)
+
+Using ~ for home directory (you need to type out /home/<user>/)
+
+Arguments in single or double quotes are not parsing as a single argument. So
+programs like awk will not function properly.
+
+Signal catching (Ctl-C, Ctl-D, Ctl-Z, etc.)
+
+Rather large input files (I think larger than 64KB) cause a block on the pipe.
+This could maybe be mitigated by utilizing buffer to hold output, then pass the
+buffered output to the next process.
