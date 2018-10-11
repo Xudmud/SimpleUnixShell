@@ -17,7 +17,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: %.c $(DEPS)
 		$(CC) -c -o $@ $< $(CFLAGS)
 
-TARGET=wic6774shell
+TARGET=../bin/wic6774shell
 
 $(TARGET): $(OBJ)
 		$(CC) -o $@ $^ $(CFLAGS) $(LIBS)

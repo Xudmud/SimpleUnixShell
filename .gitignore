@@ -1,6 +1,6 @@
 #The files listed here are ignored by git, and won't have changes tracked.
 #Binaries and object files shouldn't have any reason to be version managed.
-src/wic6774shell
+bin/wic6774shell
 obj
 src/Potter.txt
 src/testdatain.txt
