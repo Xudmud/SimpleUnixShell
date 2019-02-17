@@ -104,15 +104,9 @@ File redirection (<, >, >>)
 
 
 Not Working:
-Builtins (such as cd)
-
 Using ~ for home directory (you need to type out /home/<user>/)
 
 Arguments in single or double quotes are not parsing as a single argument. So
 programs like awk will not function properly.
 
 Signal catching (Ctl-C, Ctl-D, Ctl-Z, etc.)
-
-Rather large input files (I think larger than 64KB) cause a block on the pipe.
-This could maybe be mitigated by utilizing buffer to hold output, then pass the
-buffered output to the next process.
