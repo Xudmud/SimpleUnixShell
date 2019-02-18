@@ -1,3 +1,17 @@
+----------------
+18 February 2018
+----------------
++Cleaned up readme and .gitignore
++Added directories the makefile is dependent on.
+(thanks to
+https://stackoverflow.com/questions/115983/how-can-i-add-an-empty-directory-to-a-git-repository
+for the method on including an empty directory in a repo)
+
+----------------
+17 February 2018
+----------------
++Initial Github upload
+
 --------------
 5 October 2018
 --------------
