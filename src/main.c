@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
         else if(pid == 0)
         {
             execvp(*++argv,argv);
-            fprintf(stderr,"%s: Process not found.\n");
+            fprintf(stderr,"%s: Process not found.\n",*argv);
             exit(-1);
         }
         else

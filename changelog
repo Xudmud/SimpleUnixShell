@@ -1,3 +1,9 @@
+---------------------
+18 February 2018 (#2)
+---------------------
++Fixed a warning caused by printing a char* without specifying which char* to
+print.
+
 ----------------
 18 February 2018
 ----------------
