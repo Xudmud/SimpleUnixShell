@@ -1,0 +1,5 @@
+#This directory is needed for compilation
+#Ignore everything in this directory
+*
+#Excect for the .gitignore
+!.gitignore
