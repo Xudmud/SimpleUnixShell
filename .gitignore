@@ -1,7 +1,2 @@
 #The files listed here are ignored by git, and won't have changes tracked.
 #Binaries and object files shouldn't have any reason to be version managed.
-bin
-obj
-src/Potter.txt
-src/testdatain.txt
-src/shakespeare.txt
